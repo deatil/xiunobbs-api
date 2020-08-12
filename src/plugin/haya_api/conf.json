@@ -1,0 +1,13 @@
+{
+	"name":"API接口",
+	"brief":"论坛的API接口，验证方式借鉴于微信支付",
+	"version":"1.0.2",
+	"author":"deatil",
+	"id":"haya_api",
+	"bbs_version":"4.0.3",
+	"installed":1,
+	"enable":1,
+	"hooks_rank":[],
+	"overwrites_rank":[],
+	"dependencies":[]
+}

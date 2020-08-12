@@ -1,0 +1,215 @@
+<?php include _include(ADMIN_PATH.'view/htm/header.inc.htm'); ?>
+
+<?php include _include($haya_api_admin_view.'/tab.inc.htm'); ?>
+
+<style>
+.break-all {word-break: break-all;}
+@media (min-width: 992px) {
+	.pull-lg-right {
+		float: right;
+	}
+}
+</style>
+<div class="card">
+	<div class="card-header">
+		<ul class="nav nav-tabs card-header-tabs">
+			<li class="nav-item">
+				<a class="nav-link active" href="javascript:;">用户登录</a>
+			</li>
+		</ul>
+	</div>
+
+	<div class="card-body">
+		<div class="row mb-0 mb-md-3">
+			<div class="col-md-2 mb-2 mb-md-0">
+				<select id="srchtype" value="<?php echo $srchtype; ?>" class="form-control">
+					<option value="">搜索类型</option>
+					<option value="app_id">app_id</option>
+					<option value="uid">uid</option>
+				</select>
+			</div>
+		
+			<div class="col-md-3 mb-2 mb-md-0">
+				<input type="text" id="keyword" 
+					placeholder="请输入关键字搜索" 
+					value="<?php echo $keyword; ?>"  
+					class="form-control" 
+					data-toggle="tooltip" 
+					data-placement="top" 
+					data-original-title="请输入关键字搜索"	
+				/>
+			</div>
+			<div class="col-md-2 mb-3 mb-md-0">
+				<button id="search" class="form-control btn btn-primary">搜索</button>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="card">
+					<div class="table-responsive">
+						<table class="table table-striped table-bordered table-hover mb-0" style="min-width: 800px">
+							<thead>
+								<tr class="text-center">
+									<th width="60"><?php echo lang('delete');?></th>
+									<th width="60">ID</th>
+									<th width="80">uid</th>
+									<th width="200">app_id</th>
+									<th>token</th>
+									<th width="70">状态</th>
+									<th width="160">添加时间</th>
+									<th width="80">操作</th>
+								</tr>
+							</thead>
+							
+							<tbody id="haya_api_session_list" class="haya-api-session-list">
+								<?php if (!empty($haya_api_sessions)) { ?>
+									<?php foreach($haya_api_sessions as & $_haya_api_session){ ?>
+										<tr data-id="<?php echo $_haya_api_session['id']; ?>" class="text-center haya-api-session-<?php echo $_haya_api_session['id']; ?>">
+											<td><input type="checkbox" name="delete" /></td>
+											<td width="60"><?php echo $_haya_api_session['id']; ?></td>
+											<td width="80"><?php echo $_haya_api_session['uid']; ?></td>
+											<td class="break-all" width="200"><?php echo $_haya_api_session['app_id']; ?></td>
+											<td class="break-all"><?php echo $_haya_api_session['token']; ?></td>
+											<td width="70">
+												<?php if ($_haya_api_session['logout'] == 1) { ?>
+													<span class="text-danger">
+														已退出
+													</span>
+												<?php } else { ?>
+													<span class="text-info">
+														登录中
+													</span>
+												<?php } ?>
+											</td>
+											<td width="160">
+												<?php echo date('Y-m-d H:i:s', $_haya_api_session['create_date']); ?>
+											</td>
+											<td width="80" class="text-center">
+												<a class="btn btn-sm btn-success js-haya-api-session-detail" 
+													href="javascript:;"
+													data-modal-url="<?php echo url("haya_api-session-detail-".$_haya_api_session['id']); ?>"
+													data-modal-title="登录授权详情" 
+													data-modal-arg=".session" 
+													data-modal-size="md" 
+												>详情</a>
+											</td>
+										</tr>
+									<?php } ?>
+								<?php } else { ?>
+									<tr>
+										<td colspan="8">
+											<div class="text-center text-grey py-3">
+												没有发现登录授权记录
+											</div>
+										</td>
+									</tr>							
+								<?php } ?>
+								
+							</tbody>
+							
+							<tfoot>
+								<tr>
+									<td class="text-center border-right-0">
+										<input type="checkbox" data-target="input[name='delete']" class="checkall mt-2" value="" aria-label="全选">				
+									</td>
+									<td colspan="6">
+										<div class="container d-none d-lg-block">
+											<div class="row">
+												<div class="col-5">									
+													<button class="btn btn-sm js-haya-api-session-delete">删除</button>
+												
+													<span class="ml-3 text-muted">
+														共有 <?php echo intval($total); ?> 条记录，每页 <?php echo $pagesize; ?> 条。 
+													</span>
+												</div>
+												<div class="col-7">									
+													<?php if (!empty($pagination)) { ?>
+														<ul class="pagination mb-0 pull-right"><?php echo $pagination; ?></ul>
+													<?php } ?>
+												</div>
+											</div>
+										</div>
+											
+										<div class="container d-block d-lg-none" style="max-width: 100% !important;">
+											<div class="row">
+												<div class="col-3">									
+													<button class="btn btn-sm js-haya-api-session-delete">删除</button>
+												</div>
+												<div class="col-9">									
+													<?php if (!empty($pagination)) { ?>
+														<ul class="pagination mb-0 pull-right"><?php echo $pagination; ?></ul>
+													<?php } ?>
+												</div>
+											</div>
+										</div>
+									</td>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+					
+				</div>	
+	
+				<div class="alert alert-warning alert-custom mb-0 mt-3">
+					<i class="icon icon-exclamation-circle mr-2"></i>
+					<span class="haya-api-tip"><span class="text-danger">注意：</span>API接口的访问都进行了日志记录，你可以删除相关无用接口访问日志</span>
+				</div>						
+				
+			</div>
+		</div>
+		
+	</div>
+</div>
+
+<?php
+include _include(ADMIN_PATH.'view/htm/footer.inc.htm');
+?>
+
+<script>
+$('#nav li.nav-item-plugin').addClass('active');
+$('[data-toggle="tooltip"]').tooltip();
+
+var jsearch = $("#search");
+var jsrchtype = $("#srchtype");
+var jkeyword = $('#keyword');
+
+jsrchtype.val(jsrchtype.attr('value'));
+
+jsearch.on('click', function() {
+	var srchtype = jsrchtype.val();
+	srchtype = srchtype ? srchtype : '';
+	var keyword = $("#keyword").val();
+	var url = xn.url('haya_api-session-index-'+srchtype+'-'+xn.urlencode(keyword)+'-1');
+	window.location = url;
+});
+jkeyword.on('keydown', function(e) {
+	if (e.keyCode == 13) {
+		jsearch.trigger('click')
+	};
+});
+
+// 删除选中的文件
+$(".js-haya-api-session-delete").on('click', function(){
+	var jchecked = $("#haya_api_session_list").find('input[name="delete"]').filter(function(){ return this.checked; });
+	if (jchecked.length < 1) {
+		return $.alert("请选择要删除的日志");
+	}
+	
+	$.confirm("确认要删除所选中日志吗？", function() {
+		jchecked.each(function() {
+			jtr = $(this).parents('tr');
+			var id = jtr.attr('data-id');
+			$.xpost(xn.url('haya_api-session-delete'), {id: id}, function(code, message) {
+				if (code != 0) {
+					return $.alert(message);
+				} else {
+					$(".haya-api-session-"+id).remove();
+				}			
+			});
+		});
+	});
+	
+	return false;
+});
+</script>

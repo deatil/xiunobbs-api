@@ -1,0 +1,101 @@
+<form action="" method="post">	
+	<div class="form-group row">
+		<div class="col-12">
+			接口ID：
+			<input type="text" name="haya-api-id" value="<?php echo $haya_api_api['id']; ?>" disabled class="form-control">
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			接口文件：
+			<input type="text" name="haya-api-filename" value="<?php echo $haya_api_api['filename']; ?>" disabled class="form-control">
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			接口名称：
+			<input type="text" name="haya-api-name" value="<?php echo $haya_api_api['name']; ?>" class="form-control">
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			接口链接：
+			<input type="text" name="haya-api-url" value="<?php echo $haya_api_api['url']; ?>" class="form-control">
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			接口方式：
+			<input type="text" name="haya-api-method" disabled value="<?php echo $haya_api_api['method']; ?>" class="form-control">
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			请求实体：
+			<textarea class="form-control" style="min-height: 100px;" name="haya-api-body"><?php echo $haya_api_api['body']; ?></textarea>							
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			响应：
+			<textarea class="form-control" style="min-height: 120px;" name="haya-api-response"><?php echo $haya_api_api['response']; ?></textarea>							
+		</div>
+	</div>
+	
+	<?php if (!empty($haya_api_api['author'])) { ?>
+		<div class="form-group row">
+			<div class="col-12">
+				作者：
+				<input type="text" name="haya-api-author" value="<?php echo $haya_api_api['author']; ?>" class="form-control">
+			</div>
+		</div>	
+	<?php } ?>
+	
+	<?php if (!empty($haya_api_api['keywords'])) { ?>
+		<div class="form-group row">
+			<div class="col-12">
+				关键字：
+				<input type="text" name="haya-api-keywords" value="<?php echo $haya_api_api['keywords']; ?>" class="form-control">
+			</div>
+		</div>	
+	<?php } ?>
+	
+	<?php if (!empty($haya_api_api['description'])) { ?>
+		<div class="form-group row">
+			<div class="col-12">
+				描述：
+				<textarea class="form-control" style="min-height: 100px;" name="haya-api-description"><?php echo $haya_api_api['description']; ?></textarea>							
+			</div>
+		</div>	
+	<?php } ?>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			添加时间：
+			<input type="text" name="haya-api-create_date" value="<?php echo date('Y-m-d H:i:s', $haya_api_api['create_date']); ?>" class="form-control">
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			<div class="alert alert-danger alert-custom alert-dismissible mb-0">
+				<i class="icon icon-exclamation-circle mr-2"></i>
+				<span class="haya-api-error-tip">你可以在这里看到接口的详细信息</span>
+			</div>
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			<button type="button" class="btn btn-secondary btn-block" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true"><?php echo lang('close');?></span>
+			</button>
+		</div>
+	</div>
+</form>

@@ -1,0 +1,79 @@
+<form action="" method="post">	
+	<div class="form-group row">
+		<div class="col-12">
+			日志ID：
+			<input type="text" name="haya-api-user_log-id" value="<?php echo $haya_api_user_log['id']; ?>" disabled class="form-control">
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			app_id：
+			<input type="text" name="haya-api-user_log-app-id" value="<?php echo $haya_api_user_log['app_id']; ?>" class="form-control">
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			token：
+			<input type="text" name="haya-api-user_log-token" value="<?php echo $haya_api_user_log['token']; ?>" class="form-control">
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			客户端：
+			<input type="text" name="haya-api-user_log-app-name" value="<?php echo $haya_api_app['name']; ?>" class="form-control">
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			用户uid：
+			<input type="text" name="haya-api-user_log-uid" value="<?php echo $haya_api_user_log['uid']; ?>" class="form-control">
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			用户名称：
+			<input type="text" name="haya-api-user_log-username" value="<?php echo $haya_api_user_log_user['username']; ?>" class="form-control">
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			请求客户端：
+			<textarea class="form-control" style="min-height: 100px;" name="haya-api-user_log-useragent"><?php echo $haya_api_user_log['useragent']; ?></textarea>							
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			日志类型：
+			<input type="text" name="haya-api-user_log-type" value="<?php echo $haya_api_user_log['type']; ?>" class="form-control">
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			创建时间：
+			<input type="text" name="haya-api-user_log-create-date" value="<?php echo date('Y-m-d H:i:s', $haya_api_user_log['create_date']); ?>" class="form-control">
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			创建IP：
+			<input type="text" name="haya-api-user_log-create-ip" value="<?php echo long2ip($haya_api_user_log['create_ip']); ?>" class="form-control">
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			<button type="button" class="btn btn-secondary btn-block" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true"><?php echo lang('close');?></span>
+			</button>
+		</div>
+	</div>
+</form>

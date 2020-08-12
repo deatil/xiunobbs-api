@@ -1,0 +1,72 @@
+<form action="" method="post">	
+	<div class="form-group row">
+		<div class="col-12">
+			日志ID：
+			<input type="text" name="haya-log-id" value="<?php echo $haya_api_log['id']; ?>" disabled class="form-control">
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			app_id：
+			<input type="text" name="haya-log-app-id" value="<?php echo $haya_api_log['app_id']; ?>" class="form-control">
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			app客户端：
+			<input type="text" name="haya-log-app-name" value="<?php echo $haya_api_app['name']; ?>" class="form-control">
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			请求API：
+			<input type="text" name="haya-log-api-url" value="<?php echo htmlspecialchars($haya_api_log['api_url']); ?>" class="form-control">
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			请求链接：
+			<textarea class="form-control" style="min-height: 120px;" name="haya-log-url"><?php echo htmlspecialchars($haya_api_log['url']); ?></textarea>							
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			请求方式：
+			<input type="text" name="haya-log-method" value="<?php echo $haya_api_log['method']; ?>" class="form-control">
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			请求实体：
+			<textarea class="form-control" style="min-height: 120px;" name="haya-log-body"><?php echo $haya_api_log['body']; ?></textarea>							
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			请求时间：
+			<input type="text" name="haya-log-create-date" value="<?php echo date('Y-m-d H:i:s', $haya_api_log['create_date']); ?>" class="form-control">
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			请求IP：
+			<input type="text" name="haya-log-create-ip" value="<?php echo long2ip($haya_api_log['create_ip']); ?>" class="form-control">
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			<button type="button" class="btn btn-secondary btn-block" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true"><?php echo lang('close');?></span>
+			</button>
+		</div>
+	</div>
+</form>

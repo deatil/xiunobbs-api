@@ -1,0 +1,72 @@
+<form action="" method="post">	
+	<div class="form-group row">
+		<div class="col-12">
+			日志ID：
+			<input type="text" name="haya-request-log-id" value="<?php echo $haya_api_request_log['id']; ?>" disabled class="form-control">
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			app_id：
+			<input type="text" name="haya-request-log-app-id" value="<?php echo $haya_api_request_log['app_id']; ?>" class="form-control">
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			app客户端：
+			<input type="text" name="haya-request-log-app-name" value="<?php echo $haya_api_app['name']; ?>" class="form-control">
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			请求API：
+			<input type="text" name="haya-request-log-api-url" value="<?php echo htmlspecialchars($haya_api_request_log['api_url']); ?>" class="form-control">
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			请求方式：
+			<input type="text" name="haya-request-log-method" value="<?php echo $haya_api_request_log['method']; ?>" class="form-control">
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			请求IP：
+			<input type="text" name="haya-request-log-request-ip" value="<?php echo long2ip($haya_api_request_log['request_ip']); ?>" class="form-control">
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			请求总次数：
+			<input type="text" name="haya-request-log-request-count" value="<?php echo $haya_api_request_log['request_count']; ?>" class="form-control">
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			创建时间：
+			<input type="text" name="haya-request-log-create-date" value="<?php echo date('Y-m-d H:i:s', $haya_api_request_log['create_date']); ?>" class="form-control">
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			创建IP：
+			<input type="text" name="haya-request-log-create-ip" value="<?php echo long2ip($haya_api_request_log['create_ip']); ?>" class="form-control">
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			<button type="button" class="btn btn-secondary btn-block" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true"><?php echo lang('close');?></span>
+			</button>
+		</div>
+	</div>
+</form>

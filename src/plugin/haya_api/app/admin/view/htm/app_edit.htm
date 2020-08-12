@@ -1,0 +1,169 @@
+<?php include _include(ADMIN_PATH.'view/htm/header.inc.htm'); ?>
+
+<?php include _include($haya_api_admin_view.'/tab.inc.htm'); ?>
+
+<div class="card">
+	<div class="card-header">
+		<div class="row">
+			<div class="col-6 font-weight-bold line-height-3">
+				<ul class="nav nav-tabs card-header-tabs">
+					<li class="nav-item">
+						<a class="nav-link active" href="javascript:;">编辑授权</a>
+					</li>
+				</ul>
+			</div>
+			
+			<div class="col-6 text-right">
+				<a href="<?php echo url('haya_api-app'); ?>" class="btn btn-sm btn-dark">返回</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="card-body">
+		<div class="row">
+			<div class="col-sm-12">
+				<form action="<?php echo url('haya_api-app-edit');?>" method="post">
+					<input type="hidden" name="id" value="<?php echo $id; ?>" style="display: none;">
+					
+					<div class="form-group row mb-3 mt-4">
+						<label class="col-md-2 form-control-label text-md-right pr-0" for="name">
+							授权名称：
+						</label>
+						<div class="col-md-8">
+							<input type="text" name="name" id="name" value="<?php echo $haya_api_app['name']; ?>" placeholder="填写授权名称" class="form-control">
+							<div class="figure-caption mt-2">
+								设置授权名称，不能为空
+							</div>
+						</div>
+					</div>
+					
+					<div class="form-group row mb-3 mt-4">
+						<label class="col-md-2 form-control-label text-md-right pr-0" for="app_id">
+							app_id：
+						</label>
+						<div class="col-md-8">
+							<input type="text" name="app_id" disabled id="app_id" value="<?php echo $haya_api_app['app_id']; ?>" class="form-control">
+							<div class="figure-caption mt-2">
+								该项为自动生成，不能够被修改
+							</div>
+						</div>
+					</div>
+					
+					<div class="form-group row mb-3 mt-4">
+						<label class="col-md-2 form-control-label text-md-right pr-0" for="app_secret">
+							app_secret：
+						</label>
+						<div class="col-md-8">
+							<input type="text" name="app_secret" disabled id="app_secret" value="<?php echo $haya_api_app['app_secret']; ?>" class="form-control">
+							<div class="figure-caption mt-2">
+								该项为自动生成，不能够被修改
+							</div>
+						</div>
+					</div>
+					
+					<div class="form-group row mb-3 mt-4">
+						<label class="col-md-2 form-control-label text-md-right pr-0" for="description">
+							授权描述：
+						</label>
+						<div class="col-md-8">
+							<textarea class="form-control" style="height: 100px;" placeholder="请填写授权的描述" name="description" id="description"><?php echo $haya_api_app['description']; ?></textarea>							
+							<div class="figure-caption mt-2">
+								描述该授权主要用于哪方面
+							</div>
+						</div>
+					</div>
+					
+					<div class="form-group row mb-3 mt-4">
+						<label class="col-md-2 form-control-label text-md-right pr-0" for="request_number">
+							请求次数：
+						</label>
+						<div class="col-md-8">
+							<input type="text" name="request_number" id="request_number" value="<?php echo $haya_api_app['request_number']; ?>" placeholder="填写授权请求次数" class="form-control">
+							<div class="figure-caption mt-2">
+								设置一个API接口在每分钟内请求的最大次数。小于或等于0表示不限制
+							</div>
+						</div>
+					</div>
+					
+					<div class="form-group row">
+						<label class="col-md-2 form-control-label text-md-right pr-0" for="allow_origin">
+							跨域访问：
+						</label>
+						<div class="col-md-8">
+							<div id="open_index">
+								<?php if (isset($haya_api_app['allow_origin']) && $haya_api_app['allow_origin'] == 1) { ?>
+									<label class="custom-input custom-radio mr-3">
+										<input type="radio" name="allow_origin" value="1" checked="checked"> <?php echo lang('enable'); ?>
+									</label>
+									<label class="custom-input custom-radio mr-3">
+										<input type="radio" name="allow_origin" value="0"> <?php echo lang('disable'); ?>
+									</label>
+								<?php } else { ?>
+									<label class="custom-input custom-radio mr-3">
+										<input type="radio" name="allow_origin" value="1"> <?php echo lang('enable'); ?>
+									</label>
+									<label class="custom-input custom-radio mr-3">
+										<input type="radio" name="allow_origin" value="0" checked="checked"> <?php echo lang('disable'); ?>
+									</label>
+								<?php } ?>
+							</div>		
+							
+							<div class="figure-caption mt-2">
+								设置授权是否允许跨域访问，对APP开放请选择启用
+							</div>
+						</div>
+					</div>	
+					
+					<div class="form-group row">
+						<label class="col-md-2 form-control-label text-md-right pr-0" for="status">
+							状态：
+						</label>
+						<div class="col-md-8">
+							<div id="open_index">
+								<?php if (isset($haya_api_app['status']) && $haya_api_app['status'] == 1) { ?>
+									<label class="custom-input custom-radio mr-3">
+										<input type="radio" name="status" value="1" checked="checked"> <?php echo lang('enable'); ?>
+									</label>
+									<label class="custom-input custom-radio mr-3">
+										<input type="radio" name="status" value="0"> <?php echo lang('disable'); ?>
+									</label>
+								<?php } else { ?>
+									<label class="custom-input custom-radio mr-3">
+										<input type="radio" name="status" value="1"> <?php echo lang('enable'); ?>
+									</label>
+									<label class="custom-input custom-radio mr-3">
+										<input type="radio" name="status" value="0" checked="checked"> <?php echo lang('disable'); ?>
+									</label>
+								<?php } ?>
+							</div>		
+							
+							<div class="figure-caption mt-2">
+								设置授权的启用状态
+							</div>
+						</div>
+					</div>	
+					
+					<div class="form-group row mb-3">
+						<label class="col-md-2 form-control-label"></label>
+						<div class="col-md-2">
+							<button type="submit" class="btn btn-primary btn-block mr-2 mb-2" id="submit"><?php echo lang('save'); ?></button>
+						</div>
+						<div class="col-md-2">
+							<a role="button" class="btn btn-secondary btn-block mb-2" href="javascript:history.back();"><?php echo lang('back'); ?></a>
+						</div>
+					</div>
+					
+				</form>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<?php
+include _include(ADMIN_PATH.'view/htm/footer.inc.htm');
+?>
+
+<script>
+$('#nav li.nav-item-plugin').addClass('active');
+</script>

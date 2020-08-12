@@ -1,0 +1,89 @@
+<?php include _include(ADMIN_PATH.'view/htm/header.inc.htm'); ?>
+
+<?php include _include($haya_api_admin_view.'/tab.inc.htm'); ?>
+
+<div class="card">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" href="javascript:;">授权签名</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12">
+            
+                <div class="marks-msg with-title mb20">
+                    <h3><a name="1"></a>1、签名算法</h3>
+                    <p>签名生成的通用步骤如下： </p>
+                    <p><b>第一步，</b>设所有发送或者接收到的数据为集合M，将集合M内非空参数值的参数按照参数名ASCII码从小到大排序（字典序），使用URL键值对的格式（即key1=value1&amp;key2=value2…）拼接成字符串stringA。 </p>
+                    <p>特别注意以下重要规则： </p>
+                    <ol class="list-unstyled">
+                        <li>◆ 参数名ASCII码从小到大排序（字典序）； </li>
+                        <li>◆ 如果参数的值为空不参与签名； </li>
+                        <li>◆ 参数名区分大小写； </li>
+                        <li>◆ 验证调用返回或服务器主动通知签名时，传送的sign参数不参与签名，将生成的签名与该sign值作校验。 </li>
+                        <li>◆ 接口可能增加字段，验证签名时必须支持增加的扩展字段 </li>
+                    </ol>
+                    <p><b>第二步，</b>在stringA最后拼接上key得到stringSignTemp字符串，并对stringSignTemp进行MD5运算，再将得到的字符串所有字符转换为大写，得到sign值signValue。</p> 
+                    <p>◆ key设置路径：授权列表--&gt;添加授权--&gt;获取app_secret密钥</p>
+                    <p>举例： </p>
+                    <p class="mb10">假设传送的参数如下： </p>
+                    <div class="alert alert-warning alert-custom pb-0">
+                        <p>app_id：9427a40aba4a533f8a13505d33a34009 </p>
+                        <p>uid：2 </p>
+                        <p>token：8f41a57c94080f464ae2297487200d9c </p>
+                        <p>nonce_str：7DAZPAUSBBQLJvrm </p>
+                        <p>timestamp：1597157086 </p>
+                    </div>
+
+                    <p>第一步：对参数按照key=value的格式，并按照参数名ASCII字典序排序如下： </p>
+                    <div class="alert alert-warning alert-custom pb-0">
+                        <p>stringA="app_id=9427a40aba4a533f8a13505d33a34009&amp;nonce_str=7DAZPAUSBBQLJvrm&amp;timestamp=1597157086&amp;token=8f41a57c94080f464ae2297487200d9c&amp;uid=2"; </p>
+                    </div>
+                    <p class="mb10">第二步：拼接API密钥： </p>
+                    <div class="alert alert-warning alert-custom pb-0">
+                        <p>stringSignTemp=stringA+"&amp;key=b8be9bdee0ca0ba649e2fec32a73f1ff" <font face="宋体" color="#008000">//注：key为授权的密钥key</font> </p> 
+                        <p>sign=MD5(stringSignTemp).toUpperCase()="D39342AAB35B2734929485C822374F76" <font face="宋体" color="#008000">//注：MD5签名方式</font></p>
+                    </div>
+                    <p class="mb10">最终得到最终发送的数据： </p>
+                    <div class="alert alert-warning alert-custom pb-0">
+                        <pre>
+{
+    app_id：9427a40aba4a533f8a13505d33a34009,
+    nonce_str：7DAZPAUSBBQLJvrm,
+    timestamp：1597157086,
+    sign: D39342AAB35B2734929485C822374F76,
+    uid：2,
+    token：8f41a57c94080f464ae2297487200d9c
+}
+                        </pre>
+                    </div>
+                </div>
+
+                <div class="marks-msg with-title mb20">
+                    <h3><a name="2"></a>2、生成随机数算法</h3>
+                    <b></b>
+                    <p>API接口协议中包含字段nonce_str，主要保证签名不可预测。我们推荐生成随机数算法如下：调用随机数函数生成，将得到的值转换为字符串。 </p>
+                </div>
+
+                <div class="marks-msg with-title mb20">
+                    <h3><a name="3"></a>3、默认必填字段</h3>
+                    <b></b>
+                    <p>app_id、nonce_str、timestamp、sign。实例中，uid和token为额外传递字段。</p>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php
+include _include(ADMIN_PATH.'view/htm/footer.inc.htm');
+?>
+
+<script>
+$('#nav li.nav-item-plugin').addClass('active');
+</script>

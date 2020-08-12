@@ -1,0 +1,109 @@
+<form action="" method="post">	
+	<div class="form-group row">
+		<div class="col-12">
+			授权ID：
+			<input type="text" name="haya-api-session-id" value="<?php echo $haya_api_session['id']; ?>" disabled class="form-control">
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			app_id：
+			<input type="text" name="haya-api-session-app-id" value="<?php echo $haya_api_session['app_id']; ?>" class="form-control">
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			token：
+			<input type="text" name="haya-api-session-token" value="<?php echo $haya_api_session['token']; ?>" class="form-control">
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			客户端：
+			<input type="text" name="haya-api-session-app-name" value="<?php echo $haya_api_app['name']; ?>" class="form-control">
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			用户uid：
+			<input type="text" name="haya-api-session-uid" value="<?php echo $haya_api_session['uid']; ?>" class="form-control">
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			用户名称：
+			<input type="text" name="haya-api-session-username" value="<?php echo $haya_api_session_user['username']; ?>" class="form-control">
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			请求客户端：
+			<textarea class="form-control" style="min-height: 100px;" name="haya-api-session-useragent"><?php echo $haya_api_session['useragent']; ?></textarea>							
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			授权次数：
+			<input type="text" name="haya-api-session-logins" value="<?php echo $haya_api_session['logins']; ?>" class="form-control">
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			登录时间：
+			<input type="text" name="haya-api-session-create-date" value="<?php echo date('Y-m-d H:i:s', $haya_api_session['create_date']); ?>" class="form-control">
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			登录IP：
+			<input type="text" name="haya-api-session-create-ip" value="<?php echo long2ip($haya_api_session['create_ip']); ?>" class="form-control">
+		</div>
+	</div>
+	
+	<?php if ($haya_api_session['logout'] == 0) { ?>
+		<div class="form-group row">
+			<div class="col-12">
+				状态：
+				<input type="text" name="haya-api-session-logout" value="登录中" disabled class="form-control">
+			</div>
+		</div>	
+	<?php } else { ?>
+		<div class="form-group row">
+			<div class="col-12">
+				状态：
+				<input type="text" name="haya-api-session-logout" value="已退出" disabled class="form-control text-danger">
+			</div>
+		</div>
+		
+		<div class="form-group row">
+			<div class="col-12">
+				退出时间：
+				<input type="text" name="haya-api-session-logout-date" value="<?php echo date('Y-m-d H:i:s', $haya_api_session['logout_date']); ?>" class="form-control">
+			</div>
+		</div>
+		
+		<div class="form-group row">
+			<div class="col-12">
+				退出IP：
+				<input type="text" name="haya-api-session-logout-ip" value="<?php echo long2ip($haya_api_session['logout_ip']); ?>" class="form-control">
+			</div>
+		</div>
+	<?php } ?>
+	
+	<div class="form-group row">
+		<div class="col-12">
+			<button type="button" class="btn btn-secondary btn-block" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true"><?php echo lang('close');?></span>
+			</button>
+		</div>
+	</div>
+</form>

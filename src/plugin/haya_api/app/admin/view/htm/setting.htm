@@ -1,0 +1,138 @@
+<?php include _include(ADMIN_PATH.'view/htm/header.inc.htm'); ?>
+
+<?php include _include($haya_api_admin_view.'/tab.inc.htm'); ?>
+
+<div class="row">
+	<div class="col-sm-12">
+		
+		<div class="card">
+			<div class="card-header">
+				<ul class="nav nav-tabs card-header-tabs">
+					<li class="nav-item">
+						<a class="nav-link active" href="javascript:;">设置</a>
+					</li>
+				</ul>
+			</div>
+		
+			<div class="card-body mb-3">
+				<form action="<?php echo url('haya_api-setting');?>" method="post" class="mb-0">					
+					<div class="form-group row mb-3 mt-4">
+						<label class="col-md-2 form-control-label text-md-right pr-0" for="api_domain">
+							网站域名：
+						</label>
+						<div class="col-md-8">
+							<input type="text" name="api_domain" id="api_domain" value="<?php echo isset($config['api_domain']) ? trim($config['api_domain']) : ''; ?>" class="form-control">
+							<div class="figure-caption mt-2">
+								设置API接口需要使用的域名。比如：http://www.baidu.com/
+							</div>
+						</div>
+					</div>
+					
+					<div class="form-group row">
+						<label class="col-md-2 form-control-label text-md-right pr-0" for="api_close">
+							API状态：
+						</label>
+						<div class="col-md-8">
+							<div id="open_index">
+								<?php if (isset($config['api_close']) && $config['api_close'] == 1) { ?>
+									<label class="custom-input custom-radio mr-3">
+										<input type="radio" name="api_close" value="0"> 启用
+									</label>
+									<label class="custom-input custom-radio mr-3">
+										<input type="radio" name="api_close" value="1" checked="checked"> 关闭维护
+									</label>
+								<?php } else { ?>
+									<label class="custom-input custom-radio mr-3">
+										<input type="radio" name="api_close" value="0" checked="checked"> 启用
+									</label>
+									<label class="custom-input custom-radio mr-3">
+										<input type="radio" name="api_close" value="1"> 关闭维护
+									</label>
+								<?php } ?>
+							</div>		
+							
+							<div class="figure-caption mt-2">
+								设置API的启用状态，默认：启用
+							</div>
+						</div>
+					</div>	
+					
+					<div class="form-group row mb-3 mt-4">
+						<label class="col-md-2 form-control-label text-md-right pr-0" for="api_close_tip">
+							API维护理由：
+						</label>
+						<div class="col-md-8">
+							<textarea class="form-control" placeholder="内容" name="api_close_tip" id="api_close_tip" style="height: 120px;"><?php echo isset($config['api_close_tip']) ? trim($config['api_close_tip']) : ''; ?></textarea>									
+							<div class="figure-caption mt-2">
+								设置API关闭维护的原因，当API关闭维护时不能为空
+							</div>
+						</div>
+					</div>	
+					
+					<div class="form-group row">
+						<label class="col-md-2 form-control-label text-md-right pr-0" for="is_add_log_body">
+							记录请求实体：
+						</label>
+						<div class="col-md-8">
+							<div id="open_index">
+								<?php if (isset($config['is_add_log_body']) && $config['is_add_log_body'] == 1) { ?>
+									<label class="custom-input custom-radio mr-3">
+										<input type="radio" name="is_add_log_body" value="1" checked="checked"> <?php echo lang('enable'); ?>
+									</label>
+									<label class="custom-input custom-radio mr-3">
+										<input type="radio" name="is_add_log_body" value="0"> <?php echo lang('disable'); ?>
+									</label>
+								<?php } else { ?>
+									<label class="custom-input custom-radio mr-3">
+										<input type="radio" name="is_add_log_body" value="1"> <?php echo lang('enable'); ?>
+									</label>
+									<label class="custom-input custom-radio mr-3">
+										<input type="radio" name="is_add_log_body" value="0" checked="checked"> <?php echo lang('disable'); ?>
+									</label>
+								<?php } ?>
+							</div>		
+							
+							<div class="figure-caption mt-2">
+								记录API请求产生的实体内容，对POST请求有效
+							</div>
+						</div>
+					</div>	
+					
+					<div class="form-group row mb-3">
+						<label class="col-md-2 form-control-label text-md-right pr-0" for="clear_apis_cache">
+							清除接口列表缓存：
+						</label>
+						<div class="col-md-8">
+							<select name="clear_apis_cache" id="clear_apis_cache" class="form-control">
+								<option value="1">清除</option>
+								<option value="0" selected="selected">暂不清除</option>
+							</select>
+							<div class="figure-caption mt-2">
+								是否清空接口列表缓存
+							</div>
+						</div>
+					</div>					
+					
+					<div class="form-group row mb-0">
+						<label class="col-md-2 form-control-label"></label>
+						<div class="col-md-2">
+							<button type="submit" class="btn btn-primary btn-block mr-2 mb-2" id="submit"><?php echo lang('save'); ?></button>
+						</div>
+						<div class="col-md-2">
+							<a role="button" class="btn btn-secondary btn-block mb-2" href="javascript:history.back();"><?php echo lang('back'); ?></a>
+						</div>
+					</div>
+					
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<?php
+include _include(ADMIN_PATH.'view/htm/footer.inc.htm');
+?>
+
+<script>
+$('#nav li.nav-item-plugin').addClass('active');
+</script>
